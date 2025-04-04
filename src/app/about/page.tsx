@@ -10,16 +10,12 @@ import { motion } from "framer-motion";
 import ScrollToTopButton from "@/components/ScrollToTopButton";
 
 export default function AboutPage() {
-  const { isDarkMode, toggleDarkMode } = useTheme();
+  const { isDarkMode } = useTheme();
   const { scrollToRef } = useAbout();
 
   useEffect(() => {
     scrollToRef();
   }, []);
-
-  useEffect(() => {
-    if (!isDarkMode) toggleDarkMode();
-  }, [isDarkMode]);
 
   return (
     <div>
@@ -55,5 +51,3 @@ export default function AboutPage() {
     </div>
   );
 }
-
-// It all started with a simple curiosity about how websites worked. Before I knew it, I was building small projects, breaking things, and learning from my mistakes. That curiosity quickly evolved into a deep passion for problem-solving and creating seamless digital experiences.
