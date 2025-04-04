@@ -1,0 +1,164 @@
+"use client";
+
+import { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { useAbout } from '@/app/context/aboutContext';
+
+const Header = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [heightWindow, setHeightWindow] = useState(0);
+  const { scrollToRef } = useAbout()
+
+  useEffect(() => {
+    const updateHeight = () => setHeightWindow(document.body.offsetHeight);
+    updateHeight();
+    window.addEventListener("resize", updateHeight);
+
+    return () => window.removeEventListener("resize", updateHeight);
+  }, []);
+
+  useEffect(() => {
+    setHeightWindow(document.body.offsetHeight)
+  }, [])
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+
+  const handleScroll = () => {
+    if (typeof window !== "undefined" && window.lenis) {
+      window.lenis.scrollTo(heightWindow, {
+        duration: 1.5,
+        easing: (t: number) => 1 - Math.pow(1 - t, 3),
+      });
+    }
+  };
+
+  return (
+    <header id="header" className={`header fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'py-3 bg-[var(--foreground)] backdrop-blur-sm' : 'py-6'}`}>
+      <nav className="mx-width grid grid-cols-4 items-center">
+        <div>
+          <Link href="/" className="h4 nav-link" onClick={scrollToRef}>
+            Gabriel Kopoin
+          </Link>
+        </div>
+
+        <div className="col-span-2 ml-10 hidden md:flex items-center justify-center space-x-8">
+          <Link href={"/about"} className="h4 nav-link" onClick={scrollToRef}>
+            About
+          </Link>
+          <a
+            href=""
+            className="h4 nav-link flex items-center"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Résumé
+            <span className="ml-1">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </span>
+          </a>
+        </div>
+
+        <div className="text-right hidden md:block" onClick={handleScroll}>
+          <span className="h4 nav-link cursor-pointer">
+            Contact
+          </span>
+        </div>
+
+        {/* Mobile menu button */}
+        <div className="col-span-3 flex justify-end md:hidden">
+          <button
+            className="p-2 focus:outline-none"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Menu"
+          >
+            <div className={`w-6 h-0.5 bg-black mb-1.5 transition-all ${isMenuOpen ? 'rotate-45 translate-y-2' : ''}`} />
+            <div className={`w-6 h-0.5 bg-black mb-1.5 transition-all ${isMenuOpen ? 'opacity-0' : ''}`} />
+            <div className={`w-6 h-0.5 bg-black transition-all ${isMenuOpen ? '-rotate-45 -translate-y-2' : ''}`} />
+          </button>
+        </div>
+      </nav>
+
+      {/* Mobile menu */}
+      <div
+        className={`fixed inset-0 bg-white z-40 transform transition-transform duration-300 ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'
+          }`}
+      >
+        <div className="mx-width h-full flex flex-col justify-center items-start space-y-8 py-20">
+          <Link
+            href="/projects"
+            className="h1 font-accent"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Projects&nbsp;<sup>9</sup>
+          </Link>
+          <Link
+            href="/about"
+            className="h1 font-accent"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            About
+          </Link>
+          <a
+            href="https://drive.google.com/file/d/1NK_t_N48mATYiwAHV_aOqPw7MqDvuVAh/view?usp=sharing"
+            className="h1 font-accent flex items-center"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Résumé
+            <span className="ml-2">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </span>
+          </a>
+          <button
+            className="h1 font-accent"
+            onClick={() => {
+              setIsMenuOpen(false);
+              // Add a small delay to allow the menu to close before scrolling
+              setTimeout(() => {
+                document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+              }, 300);
+            }}
+          >
+            Contact
+          </button>
+          <div className="flex space-x-6 mt-8">
+            <a
+              href="https://www.linkedin.com/in/gabriel-kopoin/"
+              className="body"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              LinkedIn
+            </a>
+            <a
+              href="https://github.com/Rookate"
+              className="body"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Github
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+  );
+};
+
+export default Header;
