@@ -3,12 +3,14 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useAbout } from '@/app/context/aboutContext';
+import { useMediaQuery } from '@/lib/useMediaQuery';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [heightWindow, setHeightWindow] = useState(0);
   const { scrollToRef } = useAbout()
+  const isMobile = useMediaQuery('(max-width: 640px)')
 
   useEffect(() => {
     const updateHeight = () => setHeightWindow(document.body.offsetHeight);
@@ -23,15 +25,20 @@ const Header = () => {
   }, [])
 
   useEffect(() => {
+    if (isMobile) {
+      return;
+    }
+
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
 
     window.addEventListener('scroll', handleScroll);
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, []);
+  }, [isMobile]);
 
 
   const handleScroll = () => {
@@ -44,7 +51,10 @@ const Header = () => {
   };
 
   return (
-    <header id="header" className={`header fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'py-3 bg-[var(--foreground)] backdrop-blur-sm' : 'py-6'}`}>
+    <header id="header" className={`header fixed top-0 left-0 right-0 z-50 transition-all duration-300 
+      ${isScrolled ? 'py-3 bg-[var(--foreground)] backdrop-blur-sm' : 'py-6'} 
+      ${isMobile ? 'bg-background' : ''}`}
+    >
       <nav className="mx-width flex items-center justify-between md:grid md:grid-cols-4">
         {/* Logo */}
         <div>
@@ -97,7 +107,29 @@ const Header = () => {
         className={`fixed inset-0 bg-white z-40 transform transition-transform duration-300 ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'
           }`}
       >
-        <div className="mx-width h-full flex flex-col justify-center items-start space-y-8 py-20">
+        <div className="relative mx-width h-full flex flex-col justify-center items-start space-y-8 py-20">
+          {/* Close Button for mobile */}
+          <button
+            className="absolute top-4 right-4 p-2"
+            onClick={() => setIsMenuOpen(false)}
+            aria-label="Close Menu"
+          >
+            <svg
+              className="w-6 h-6 text-black"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+
           <Link
             href="/about"
             className="h1 font-accent"
