@@ -69,7 +69,7 @@ const Header = () => {
             About
           </Link>
           <a
-            href=""
+            href="https://drive.google.com/file/d/1SwdYb1cBDbHjlnaDmgplM1_Jm292V36I/view?usp=sharing"
             className="h4 nav-link flex items-center"
             target="_blank"
             rel="noopener noreferrer"
@@ -138,7 +138,7 @@ const Header = () => {
             About
           </Link>
           <a
-            href="https://drive.google.com/file/d/1NK_t_N48mATYiwAHV_aOqPw7MqDvuVAh/view?usp=sharing"
+            href="https://drive.google.com/file/d/1SwdYb1cBDbHjlnaDmgplM1_Jm292V36I/view?usp=sharing"
             className="h1 font-accent flex items-center"
             target="_blank"
             rel="noopener noreferrer"
