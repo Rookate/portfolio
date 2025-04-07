@@ -7,9 +7,9 @@ import Capabilities from "@/components/Capabalities";
 
 export default function Home() {
   return (
-    <div>
+    <div className="mx-width">
       <Header />
-      <main className="relative min-h-screen z-10 transition-all duration-700 bg-background text-foreground">
+      <main className="relative min-h-screen transition-all duration-700 text-foreground">
         <Hero />
         <Projects />
         <Capabilities />

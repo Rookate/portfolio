@@ -75,8 +75,9 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply duration-300 bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
+    overflow-x: hidden;
   }
 }
 
@@ -132,7 +133,7 @@
   }
 
   .h1 {
-    @apply font-hairline text-5xl md:text-6xl leading-tight;
+    @apply font-hairline text-4xl sm:text-5xl lg:text-6xl leading-tight;
   }
 
   .h2 {

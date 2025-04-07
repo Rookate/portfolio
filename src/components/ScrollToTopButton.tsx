@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { ArrowUp } from "lucide-react";
+import { useMediaQuery } from "@/lib/useMediaQuery";
 
 const ScrollToTopButton = () => {
     const [isVisible, setIsVisible] = useState(false);
@@ -27,6 +28,8 @@ const ScrollToTopButton = () => {
             });
         }
     };
+    const isMobile = useMediaQuery('(max-width: 640px)');
+    const iconSize = isMobile ? 15 : 30;
 
     return (
         <button
@@ -35,7 +38,7 @@ const ScrollToTopButton = () => {
                 }`}
             aria-label="Scroll to top"
         >
-            <ArrowUp size={30} />
+            <ArrowUp size={iconSize} />
         </button>
     );
 };

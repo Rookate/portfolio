@@ -45,14 +45,16 @@ const Header = () => {
 
   return (
     <header id="header" className={`header fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'py-3 bg-[var(--foreground)] backdrop-blur-sm' : 'py-6'}`}>
-      <nav className="mx-width grid grid-cols-4 items-center">
+      <nav className="mx-width flex items-center justify-between md:grid md:grid-cols-4">
+        {/* Logo */}
         <div>
           <Link href="/" className="h4 nav-link" onClick={scrollToRef}>
             Gabriel Kopoin
           </Link>
         </div>
 
-        <div className="col-span-2 ml-10 hidden md:flex items-center justify-center space-x-8">
+        {/* Menu links - only visible on md and above */}
+        <div className="hidden md:flex col-span-2 ml-10 items-center justify-center space-x-8">
           <Link href={"/about"} className="h4 nav-link" onClick={scrollToRef}>
             About
           </Link>
@@ -71,14 +73,13 @@ const Header = () => {
           </a>
         </div>
 
-        <div className="text-right hidden md:block" onClick={handleScroll}>
-          <span className="h4 nav-link cursor-pointer">
-            Contact
-          </span>
+        {/* Contact - only visible on md and above */}
+        <div className="hidden md:block text-right" onClick={handleScroll}>
+          <span className="h4 nav-link cursor-pointer">Contact</span>
         </div>
 
         {/* Mobile menu button */}
-        <div className="col-span-3 flex justify-end md:hidden">
+        <div className="md:hidden">
           <button
             className="p-2 focus:outline-none"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -97,13 +98,6 @@ const Header = () => {
           }`}
       >
         <div className="mx-width h-full flex flex-col justify-center items-start space-y-8 py-20">
-          <Link
-            href="/projects"
-            className="h1 font-accent"
-            onClick={() => setIsMenuOpen(false)}
-          >
-            Projects&nbsp;<sup>9</sup>
-          </Link>
           <Link
             href="/about"
             className="h1 font-accent"

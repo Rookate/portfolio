@@ -18,9 +18,9 @@ export default function AboutPage() {
   }, []);
 
   return (
-    <div>
+    <div className="mx-width">
       <Header />
-      <main className="pt-40 pb-20 relative min-h-screen z-10 rounded-br-[3.5rem] rounded-bl-[3.5rem]">
+      <main className=" pt-32 sm:pt-40 pb-20 relative min-h-screen z-10 rounded-br-[3.5rem] rounded-bl-[3.5rem]">
         <motion.section
           className="mx-width"
           initial={{ opacity: 0, y: 50 }}

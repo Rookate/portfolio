@@ -17,11 +17,11 @@ const Hero = () => {
 
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center pt-32 pb-20 z-10">
-      <div className="max-width grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+      <div className="mx-width grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
         {/* TITRE PRINCIPAL ANIMÉ */}
-        <div className="flex-col col-span-1 md:col-span-2 flex gap-4 justify-center relative">
+        <div className="flex flex-col col-span-1 md:col-span-2 items-center md:items-start gap-4 relative">
           <motion.h1
-            className="display-title text-center font-boldonse text-6xl md:text-left lg:text-8xl"
+            className="display-title font-boldonse text-center md:text-left font-bold text-3xl sm:text-5xl lg:text-7xl leading-tight"
             initial={{ opacity: 0, y: -50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: "easeOut" }}
@@ -30,7 +30,7 @@ const Hero = () => {
           </motion.h1>
 
           <motion.p
-            className="text-right"
+            className="text-sm"
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1.2, ease: "easeOut", delay: 0.5 }}
@@ -46,7 +46,7 @@ const Hero = () => {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.2, ease: "easeOut", delay: 0.8 }}
         >
-          <p className="flex flex-col text-2xl">
+          <p className="flex flex-col text-lg sm:text-xl md:text-2xl gap-2 text-center md:text-left">
             <motion.span
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -91,13 +91,13 @@ const Hero = () => {
           className="flex flex-col items-center space-y-2 opacity-70 hover:opacity-100 transition-opacity"
           onClick={handleScroll}
         >
-          <span className="h4">Scroll to explore</span>
+          <span className="text-sm sm:text-base font-medium">Scroll to explore</span>
           <motion.svg
             initial={{ y: 0 }}
             animate={{ y: 10 }}
             transition={{ duration: 1, repeat: Infinity, repeatType: "reverse" }}
-            width="16"
-            height="16"
+            width="20"
+            height="20"
             viewBox="0 0 24 24"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"

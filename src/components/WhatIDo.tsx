@@ -17,7 +17,7 @@ export default function WhatIDo() {
         <motion.div className="flex flex-col w-full mt-24">
             <motion.h2 className={`${isDarkMode ? 'text-neutral-50' : 'text-neutral-600'} text-4xl border-b p-4 pl-0 mb-12`}>What I do</motion.h2>
 
-            <motion.div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-32">
+            <motion.div className="grid grid-cols-1 gap-16 sm:grid-cols-2 lg:grid-cols-3 lg:gap-32">
                 {skills.map((skill, index) => (
                     <motion.div key={index} className="space-y-4">
                         <motion.h3 className={`text-3xl ${isDarkMode ? "text-neutral-300" : " text-neutral-900"} font-light mb-4`}>{`${skill.title}`}</motion.h3>

@@ -63,7 +63,7 @@ const ProjectCard = ({ project }: { project: typeof projects[0] }) => {
     window.location.href = link;
   };
 
-  const disabled = project.id === 4; // Ton condition pour désactiver un bouton
+  const disabled = project.id === 4;
 
   return (
     <motion.div
@@ -73,7 +73,7 @@ const ProjectCard = ({ project }: { project: typeof projects[0] }) => {
       viewport={{ once: true }}
       className="flex flex-col gap-4 items-center max-w-[44rem]"
     >
-      <span className="text-3xl font-bold">{project.title}</span>
+      <span className="text-3xl text-center md:text-left font-bold">{project.title}</span>
       <p className="text-center">{project.content}</p>
       <div ref={project.id === 4 ? ref : null} className="flex flex-wrap justify-center gap-2 w-full">
         {project.stack?.map((stack, index) => (
