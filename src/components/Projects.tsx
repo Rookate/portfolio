@@ -98,13 +98,6 @@ const ProjectCard = ({ project }: { project: typeof projects[0] }) => {
             text="Github"
             onClick={() => handleGithubLink(project.link)}
           />
-          {project.id === 1 && project.site && (
-            <InteractiveHoverButton
-              className="mt-4 border-neutral-400"
-              text="Try me"
-              onClick={() => handleGithubLink(project.site)}
-            />
-          )}
         </div>
       )
       }
